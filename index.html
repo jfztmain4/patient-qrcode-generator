@@ -37,6 +37,16 @@
         </form>
 
         <div id="qrcode"></div>
+        <br>
+        <a id="downloadLink" href="#" download="qrcode.png">Download QR Code</a>
+        <br>
+        <img id="qrImage" src="#" alt="QR Code" style="display:none; cursor: pointer;" onclick="maximizeQRCode()">
+    </div>
+
+    <!-- Popup for displaying the QR code in a larger view -->
+    <div id="popup" class="popup" style="display:none;">
+        <span class="close" onclick="closePopup()">&times;</span>
+        <img id="popupImage" src="#">
     </div>
 
     <script src="script.js"></script>
