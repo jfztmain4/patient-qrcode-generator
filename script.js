@@ -1,5 +1,12 @@
 function generateQRCode() {
     var form = document.getElementById('patientForm');
+    
+    // Check if all fields are filled
+    if (!form.checkValidity()) {
+        alert("Please fill in all the required fields.");
+        return;
+    }
+
     var data = {
         name: form.name.value,
         age: form.age.value,
