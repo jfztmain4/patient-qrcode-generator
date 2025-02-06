@@ -30,7 +30,7 @@ function generateQRCode() {
         var qrCodeData = JSON.stringify(data);
 
         // Clear previous QR code if any
-        var qrcodeContainer = document.getElementById("qrcode");
+        var qrcodeContainer = document.getElementById("qrcodeContainer");
         qrcodeContainer.innerHTML = "";
 
         // Generate new QR code
@@ -40,7 +40,7 @@ function generateQRCode() {
             height: 128
         });
 
-        // Display the QR code as an image for saving
+        // Get the QR code as an image for saving and displaying
         var qrImage = document.getElementById("qrImage");
         var qrCanvas = qrcodeContainer.querySelector("canvas");
         var qrDataURL = qrCanvas.toDataURL("image/png");
