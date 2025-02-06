@@ -7,6 +7,7 @@ body {
     align-items: center;
     height: 100vh;
     background-color: #f0f0f0;
+    overflow: hidden; /* Prevent body from scrolling */
 }
 
 .container {
@@ -17,6 +18,8 @@ body {
     width: 90%;
     max-width: 400px;
     text-align: center;
+    overflow-y: auto; /* Make container scrollable */
+    max-height: 80vh; /* Limit height to 80% of viewport */
 }
 
 form {
