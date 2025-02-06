@@ -36,11 +36,11 @@
             <button type="button" onclick="generateQRCode()">Generate QR Code</button>
         </form>
 
-        <div id="qrcode"></div>
-        <br>
-        <a id="downloadLink" href="#" download="qrcode.png">Download QR Code</a>
-        <br>
-        <img id="qrImage" src="#" alt="QR Code" style="display:none; cursor: pointer;" onclick="maximizeQRCode()">
+        <div id="qrcodeContainer">
+            <a id="downloadLink" href="#" download="qrcode.png">
+                <img id="qrImage" src="#" alt="QR Code" style="display:none; cursor: pointer;">
+            </a>
+        </div>
     </div>
 
     <!-- Popup for displaying the QR code in a larger view -->
