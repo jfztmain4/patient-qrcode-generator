@@ -1,74 +1,81 @@
-function generateQRCode() {
-    var form = document.getElementById('patientForm');
-    
-    // Check if all fields are filled
-    if (!form.checkValidity()) {
-        alert("Please fill in all the required fields.");
-        return;
-    }
-
-    var data = {
-        name: form.name.value,
-        age: form.age.value,
-        address: form.address.value,
-        contact: form.contact.value,
-        weight: form.weight.value,
-        gender: form.gender.value
-    };
-
-    // Prompt user to confirm information
-    var confirmationMessage = `
-        Please confirm your information:\n
-        Name: ${data.name}\n
-        Age: ${data.age}\n
-        Address: ${data.address}\n
-        Contact Number: ${data.contact}\n
-        Weight: ${data.weight} kg\n
-        Gender: ${data.gender}
-    `;
-    if (confirm(confirmationMessage)) {
-        var qrCodeData = JSON.stringify(data);
-
-        // Clear previous QR code if any
-        var qrcodeContainer = document.getElementById("qrcodeContainer");
-        qrcodeContainer.innerHTML = "";
-
-        // Generate new QR code
-        var qrCode = new QRCode(qrcodeContainer, {
-            text: qrCodeData,
-            width: 128,
-            height: 128
-        });
-
-        // Get the QR code as an image for saving and displaying
-        var qrImage = document.getElementById("qrImage");
-        var qrCanvas = qrcodeContainer.querySelector("canvas");
-        var qrDataURL = qrCanvas.toDataURL("image/png");
-        qrImage.src = qrDataURL;
-        qrImage.style.display = "block";
-
-        // Set the download link
-        var downloadLink = document.getElementById("downloadLink");
-        downloadLink.href = qrDataURL;
-
-        // Scroll to QR code
-        qrcodeContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    } else {
-        // Allow user to edit their information
-        alert("Please correct your information and try again.");
-    }
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    overflow: hidden; /* Prevent body from scrolling */
 }
 
-function maximizeQRCode() {
-    var qrImage = document.getElementById("qrImage");
-    var popup = document.getElementById("popup");
-    var popupImage = document.getElementById("popupImage");
-
-    popupImage.src = qrImage.src;
-    popup.style.display = "flex";
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    overflow-y: auto; /* Make container scrollable */
+    max-height: 80vh; /* Limit height to 80% of viewport */
 }
 
-function closePopup() {
-    var popup = document.getElementById("popup");
-    popup.style.display = "none";
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#qrcodeContainer {
+    margin-top: 20px;
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup img {
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
 }
