@@ -40,10 +40,35 @@ function generateQRCode() {
             height: 128
         });
 
+        // Display the QR code as an image for saving
+        var qrImage = document.getElementById("qrImage");
+        var qrCanvas = qrcodeContainer.querySelector("canvas");
+        var qrDataURL = qrCanvas.toDataURL("image/png");
+        qrImage.src = qrDataURL;
+        qrImage.style.display = "block";
+
+        // Set the download link
+        var downloadLink = document.getElementById("downloadLink");
+        downloadLink.href = qrDataURL;
+
         // Scroll to QR code
         qrcodeContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
     } else {
         // Allow user to edit their information
         alert("Please correct your information and try again.");
     }
+}
+
+function maximizeQRCode() {
+    var qrImage = document.getElementById("qrImage");
+    var popup = document.getElementById("popup");
+    var popupImage = document.getElementById("popupImage");
+
+    popupImage.src = qrImage.src;
+    popup.style.display = "flex";
+}
+
+function closePopup() {
+    var popup = document.getElementById("popup");
+    popup.style.display = "none";
 }
